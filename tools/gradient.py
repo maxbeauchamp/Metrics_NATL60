@@ -1,3 +1,5 @@
+from Metrics_NATL60 import *
+
 def Gradient(img, order):
     """ calcuate x, y gradient and magnitude """
     sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=3)

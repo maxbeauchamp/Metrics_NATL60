@@ -1,3 +1,5 @@
+from Metrics_NATL60 import *
+
 def plot_SNR(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resssh,resfile):
 
     # select only 10-day windows
@@ -35,5 +37,7 @@ def plot_SNR(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resssh,resf
     plt.grid(which='both', linestyle='--')
     plt.savefig(resfile) # save the figure
     plt.close()          # close the figure
+
+
 
 

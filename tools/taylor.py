@@ -1,3 +1,5 @@
+from Metrics_NATL60 import *
+
 def Taylor_stats(a,b):
     """ Compute the Taylor Statistics between 2 n-dimensional vectors. """
     abar = np.nanmean(a)

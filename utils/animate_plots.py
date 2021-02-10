@@ -1,3 +1,5 @@
+from Metrics_NATL60 import *
+
 def animate_plots(list_data,labels_data,lday,extent,lon,lat,resfile,gradient=False):
 
     def animate(i, fig, ax):
@@ -18,7 +20,7 @@ def animate_plots(list_data,labels_data,lday,extent,lon,lat,resfile,gradient=Fal
                 cmap="coolwarm"
                 plot(ax,ii,jj,lon,lat,list_data[ivar][i],labels_data[ivar],
                      extent=extent,cmap=cmap,vmin=vmin,vmax=vmax,colorbar=False)
-            fig.suptitle(lday[i])
+            #fig.suptitle(lday[i])
         return fig, ax
 
     if gradient==False:

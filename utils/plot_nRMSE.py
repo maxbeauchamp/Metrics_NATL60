@@ -1,4 +1,7 @@
-def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resfile,gradient=False):
+from Metrics_NATL60 import *
+
+## 1) Function for plotting nRMSE
+def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=False):
 
     N   = len(lday)
     GT  = list_data[0]
@@ -43,7 +46,7 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resfile,g
     plt.axvline(x=39)
     plt.axvline(x=59)
     # graphical options
-    plt.ylim(0,np.ceil(np.max(nRMSE)*100)/100)
+    plt.ylim(0,ymax)
     plt.ylabel('nRMSE')
     plt.xlabel('Time (days)')
     plt.xticks([0,20,40,60],\
@@ -57,7 +60,7 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resfile,g
     width=0.75
     if ( (any("Obs (nadir+swot)"==s for s in labels_data)) and any("Obs (nadir)"==s for s in labels_data) ):
         p1 = axes2.bar(range(N), spatial_coverage_nadir, width,color='r',alpha=0.25)
-        p2 = axes2.bar(range(N), spatial_coverage_nadirswot-spatial_coverage_nadir, width,bottom=spatial_coverage_nadir,color='g',alpha=0.25)
+        p2 = axes2.bar(range(N), [spatial_coverage_nadirswot[i]-spatial_coverage_nadir[i] for i in range(len(spatial_coverage_nadir))], width,bottom=spatial_coverage_nadir,color='g',alpha=0.25)
     elif any("Obs (nadir+swot)"==s for s in labels_data):
         p1 = axes2.bar(range(N), spatial_coverage_nadirswot, width,color='g',alpha=0.25)
     else:
@@ -67,4 +70,5 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resfile,g
     axes2.margins(x=0)
     plt.savefig(resfile,bbox_inches="tight")    # save the figure
     plt.close()                                 # close the figure
+
 

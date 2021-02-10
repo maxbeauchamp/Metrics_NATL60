@@ -5,9 +5,11 @@
 __author__ = "Maxime Beauchamp"
 __version__ = "0.0.1"
 __date__ = "2021-02-10"
-__email__ = "maxime.beauchamp@imt-atantique.fr"
+__email__ = "maxime.beauchamp@imt-atlantique.fr"
 
-basepath="/users/local/m19beauc/"
+basepath="/linkhome/rech/genimt01/uba22to"
+datapath="/gpfswork/rech/yrf/uba22to/DATA"
+scratchpath="/gpfsscratch/rech/yrf/uba22to/4DVARNN-DinAE_xp"
 
 print("Initializing Metrics_NATL60 libraries...",flush=True)
 

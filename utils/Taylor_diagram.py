@@ -1,3 +1,5 @@
+from Metrics_NATL60 import *
+
 def Taylor_diagram(list_data,labels_data,colors,lstyle,resfile):
 
     # select only 10-day windows
@@ -22,11 +24,13 @@ def Taylor_diagram(list_data,labels_data,colors,lstyle,resfile):
 
     # create a dictionnary with data
     series={}
-    for i in np.delete(np.arange(len(list_data)),1):
+    id_obs=np.where(["Obs" in l for l in labels_data ])[0]
+    for i in np.delete(np.arange(len(list_data)),id_obs):
         series[labels_data[i]] = list_data[i][index].flatten()-lr
-    Taylor_diag(series,np.delete(labels_data,1),\
-            styles=np.delete(lstyle,1),\
-            colors=np.delete(colors,1))
+    Taylor_diag(series,np.delete(labels_data,id_obs),\
+            styles=np.delete(lstyle,id_obs),\
+            colors=np.delete(colors,id_obs))
     plt.savefig(resfile)
     plt.close()
+
 

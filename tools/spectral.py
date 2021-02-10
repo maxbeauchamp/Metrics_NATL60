@@ -1,3 +1,10 @@
+from Metrics_NATL60 import *
+
+def cart2pol(x, y):
+    rho = np.sqrt(x**2 + y**2)
+    phi = np.arctan2(y, x)
+    return(phi, rho)
+
 def hanning2d(M, N):
     """
     A 2D hanning window, as per IDL's hanning function.  See numpy.hanning for the 1d description
