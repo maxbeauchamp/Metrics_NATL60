@@ -1,6 +1,6 @@
 from Metrics_NATL60 import *
 
-def RIAE_scores(list_data,labels_data,resfile,pct_var,gradient=False):
+def RIAE_scores(list_data,labels_data,resfile,pct_var=10,gradient=False):
 
     # select only 10-day windows
     index=list(range(5,16))

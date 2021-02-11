@@ -1,0 +1,28 @@
+name: Compute metrics
+on: [pull_request]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
+        with:
+          version: latest
+      - name: install mamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: .github/mamba.yaml
+      - name: cml_run
+        shell: bash -l {0}
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mamba env update -f environment.yml
+
+          # Your ML workflow goes here
+          PYTHONPATH=. python  scripts/postpro.py
+
+          # Write your CML report
+          cat work/nrmse_score.txt >> report.md
+          cml-publish work/TS_nRMSE_nadirswot.png >> report.md
+          cml-send-comment report.md
