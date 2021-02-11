@@ -2,7 +2,7 @@
 
 __author__ = "Maxime Beauchamp"
 __version__ = "0.1"
-__date__ = "2020-12-10"
+__date__ = "2021-02-10"
 __email__ = "maxime.beauchamp@imt-atantique.fr"
 
 from Metrics_NATL60 import *
