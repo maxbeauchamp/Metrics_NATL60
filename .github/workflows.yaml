@@ -1,0 +1,21 @@
+name: Compute metrics
+on: [pull_request]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+          # Your ML workflow goes here
+          bin/mamba env create -f environment.yaml -p $(pwd)/.conda_env
+          ./conda_env/bin/python  scripts/postpro.py
+
+          # Write your CML report
+          cat work/nrmse.txt >> report.md
+          cml-publish work/TS_nRMSE_nadirswot.png >> report.md
+          cml-send-comment report.md
