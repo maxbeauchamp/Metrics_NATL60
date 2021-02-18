@@ -23,6 +23,7 @@ jobs:
           PYTHONPATH=. python  scripts/postpro.py
 
           # Write your CML report
-          cat work/nrmse_score.txt >> report.md
-          cml-publish work/TS_nRMSE_nadirswot.png --md >> report.md
+          cat work/*nrmse_score.txt >> report.md
+          cml-publish work/*TS_nRMSE_nadirswot.png --md >> report.md
+          cml-publish work/*TS_nRMSE_Grad_nadirswot.png --md >> report.md
           cml-send-comment report.md

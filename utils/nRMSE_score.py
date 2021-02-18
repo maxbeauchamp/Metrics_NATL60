@@ -1,5 +1,7 @@
-from Metrics_NATL60 import *
+from pathlib import Path
 
+from Metrics_NATL60 import *
+import pandas as pd
 def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
 
     # select only 10-day windows
@@ -14,8 +16,8 @@ def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
     id1=np.where(["GT" not in l for l in labels_data ])[0]
     id2=np.where(["Obs" not in l for l in labels_data ])[0]
     id_plot=np.intersect1d(id1,id2)
-    tab_scores = np.zeros((len(labels_data[id_plot]),3))
-    for i in range(len(labels_data[id_plot])):
+    scores = []
+    for label, i in enumerate(labels_data[id_plot]):
         meth_i=list_data[id_plot[i]][index]
         print(labels_data[id_plot[i]])
         nRMSE=[]
@@ -24,9 +26,15 @@ def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
                 nRMSE.append((np.sqrt(np.nanmean(((GT[j]-np.nanmean(GT[j]))-(meth_i[j]-np.nanmean(meth_i[j])))**2)))/np.nanstd(GT[j]))
             else:
                 nRMSE.append((np.sqrt(np.nanmean(((Gradient(GT[j],2)-np.nanmean(Gradient(GT[j],2)))-(Gradient(meth_i[j],2)-np.nanmean(Gradient(meth_i[j],2))))**2)))/np.nanstd(Gradient(GT[j],2)))
-        tab_scores[i,0] = np.nanmean(nRMSE)
-        tab_scores[i,1] = np.percentile(nRMSE,5)
-        tab_scores[i,2] = np.percentile(nRMSE,95)
+        scores.append(
+            {
+                'label': label,
+                'mean_rmse': np.nanmean(nRMSE),
+                '5_perc_rmse': np.percentile(nRMSE,5),
+                '95_perc_rmse': np.percentile(nRMSE,95),
+            }
+        )
 
-    np.savetxt(fname=resfile,X=tab_scores,fmt='%2.2f')
+    Path(resfile).write_text(pd.DataFrame(scores).set_index('label').to_markdown())
+
 

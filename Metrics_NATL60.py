@@ -61,13 +61,6 @@ from tools.plot           import *
 from tools.spectral       import *
 from tools.taylor         import *
 from utils.plot_nRMSE     import *
-from utils.plot_SNR       import *
-from utils.PSD            import *
-from utils.Taylor_diagram import *
-from utils.plot_maps      import *
-from utils.animate_plots  import *
-from utils.export_NetCDF  import *
-from utils.RIAE_score     import *
 from utils.nRMSE_score     import *
 print("...Done") # ... initializing Libraries
 
