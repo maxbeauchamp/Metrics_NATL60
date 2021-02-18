@@ -58,8 +58,6 @@ sys.path.insert(0,basepath+'/Metrics_NATL60/tools')
 from tools.gradient       import *
 from tools.imputing_nan   import *
 from tools.plot           import *
-from tools.spectral       import *
-from tools.taylor         import *
 from utils.plot_nRMSE     import *
 from utils.nRMSE_score     import *
 print("...Done") # ... initializing Libraries
