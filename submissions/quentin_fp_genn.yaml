@@ -3,4 +3,4 @@ code: https://github.com/maxbeauchamp/4DVARNN-DinAE
 domain: GULFSTREAM
 submitter: Quentin
 experiment_label: fp genn nadir+swot lag 0 with OI
-experiment_slug: fpgenn
+experiment_slug: fp-genn-lag-0

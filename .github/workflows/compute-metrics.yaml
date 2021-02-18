@@ -5,25 +5,47 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
-      - uses: iterative/setup-cml@v1
-        with:
-          version: latest
       - name: install mamba
+        if: ${{ !env.ACT }}
         uses: mamba-org/provision-with-micromamba@main
         with:
           environment-file: .github/mamba.yaml
-      - name: cml_run
+      - name: install env
+        if: ${{ !env.ACT }}
         shell: bash -l {0}
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mamba env update -f environment.yml
-
+      - name: compute metrics
+        shell: bash -l {0}
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           # Your ML workflow goes here
           PYTHONPATH=. python  scripts/postpro.py
-
+      - uses: iterative/setup-cml@v1
+        with:
+          version: latest
+      - name: submit report
+        shell: bash -l {0}
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           # Write your CML report
-          cat work/*nrmse_score.txt >> report.md
-          cml-publish work/*TS_nRMSE_nadirswot.png --md >> report.md
-          cml-publish work/*TS_nRMSE_Grad_nadirswot.png --md >> report.md
+        run: |
+          cat work/submission.md >> report.md
+          echo '\n\n' >> report.md
+          if test -f "work/GULFSTREAM_nrmse_score.txt"; then
+            cat work/GULFSTREAM_nrmse_score.txt >> report.md
+            echo '\n\n' >> report.md
+            cml-publish work/GULFSTREAM_TS_nRMSE_nadirswot.png --md >> report.md
+            cml-publish work/GULFSTREAM_TS_nRMSE_Grad_nadirswot.png --md >> report.md
+          fi
+
+          if test -f "work/OSMOSIS_nrmse_score.txt"; then
+            cat work/GULFSTREAM_nrmse_score.txt >> report.md
+            echo '\n\n' >> report.md
+            cml-publish work/GULFSTREAM_TS_nRMSE_nadirswot.png --md >> report.md
+            cml-publish work/GULFSTREAM_TS_nRMSE_Grad_nadirswot.png --md >> report.md
+          fi
           cml-send-comment report.md
