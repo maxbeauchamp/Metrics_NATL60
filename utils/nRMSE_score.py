@@ -17,7 +17,7 @@ def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
     id2=np.where(["Obs" not in l for l in labels_data ])[0]
     id_plot=np.intersect1d(id1,id2)
     scores = []
-    for label, i in enumerate(labels_data[id_plot]):
+    for i, label in enumerate(labels_data[id_plot]):
         meth_i=list_data[id_plot[i]][index]
         print(labels_data[id_plot[i]])
         nRMSE=[]
@@ -34,7 +34,9 @@ def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
                 '95_perc_rmse': np.percentile(nRMSE,95),
             }
         )
-
-    Path(resfile).write_text(pd.DataFrame(scores).set_index('label').to_markdown())
+    print(resfile)
+    print(pd.DataFrame(scores).to_markdown())
+    with open(resfile, 'w') as f:
+        pd.DataFrame(scores).set_index('label').to_markdown(f)
 
 

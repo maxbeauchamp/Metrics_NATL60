@@ -18,8 +18,8 @@ from ruamel import yaml
 # type_obs   = sys.argv[3]
 # domain     = sys.argv[4]
 
-workpath = "work"
-Path(workpath).mkdir(exist_ok=True, parents=True)
+workpath = Path("work")
+workpath.mkdir(exist_ok=True, parents=True)
 
 submissions_files = list(Path('submissions').glob('*'))
 submission_data =[]
@@ -28,7 +28,7 @@ for sub_file in submissions_files:
         submission_data.append(yaml.load(f))
 
 sub_df = pd.DataFrame(submission_data)
-
+(workpath / "submission.md").write_text(sub_df.to_markdown())
 for domain in sub_df.domain.drop_duplicates():
     sub_domain = sub_df.loc[lambda df: df.domain == domain]
     ## parameters
@@ -46,9 +46,9 @@ for domain in sub_df.domain.drop_duplicates():
         indLon     = 200
 
     ## store all data in a list
-    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
-    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/NATL60_"+domain+"_XP1_OBS_NADIRSWOT.nc#mode=bytes"
-    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/NATL60_"+domain+"_XP1_OI_NADIRSWOT.nc#mode=bytes"
+    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
+    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_mod.nc#mode=bytes"
+    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OI_NADIRSWOT_mod.nc#mode=bytes"
     sub_files = sub_domain['data']
 
     # Reload results
@@ -90,11 +90,11 @@ for domain in sub_df.domain.drop_duplicates():
         ymax = 0.3
     else:
         ymax = 0.2
-    resfile=workpath+f"/{domain}_TS_nRMSE_nadirswot.png"
+    resfile=workpath / f"{domain}_TS_nRMSE_nadirswot.png"
     plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=False)
-    resfile=workpath+f"/{domain}_TS_nRMSE_Grad_nadirswot.png"
+    resfile=workpath / f"{domain}_TS_nRMSE_Grad_nadirswot.png"
     plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=True)
 
-    resfile=workpath+f"/{domain}_nrmse_score.txt"
+    resfile=workpath / f"{domain}_nrmse_score.txt"
     nRMSE_scores(list_data,labels_data,resfile,gradient=False)
 
