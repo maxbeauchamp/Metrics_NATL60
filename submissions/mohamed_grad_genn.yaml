@@ -1,4 +1,4 @@
-data: https://s3.eu-central-1.wasabisys.com/melody/NATL60_GULFSTREAM_XP1_GENN002.nc
+data: ../data/NATL60_GULFSTREAM_XP1_GENN002.nc
 code: https://github.com/maxbeauchamp/4DVARNN-DinAE
 domain: GULFSTREAM
 submitter: Mohamed

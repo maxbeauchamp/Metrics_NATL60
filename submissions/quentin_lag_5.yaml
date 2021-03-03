@@ -1,4 +1,4 @@
-data: https://s3.eu-central-1.wasabisys.com/melody/metrics_data/quentin_test_lag_5.nc
+data: ../data/quentin_test_lag_5.nc
 code: https://github.com/maxbeauchamp/4DVARNN-DinAE
 domain: GULFSTREAM
 submitter: Quentin
