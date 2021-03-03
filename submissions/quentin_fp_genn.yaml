@@ -1,4 +1,4 @@
-data: ../data/quentin_test_submission.fp_genn_lag.nc
+data: ./data/quentin_test_submission.fp_genn_lag.nc
 code: https://github.com/maxbeauchamp/4DVARNN-DinAE
 domain: GULFSTREAM
 submitter: Quentin

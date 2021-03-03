@@ -46,17 +46,22 @@ for domain in sub_df.domain.drop_duplicates():
         indLon     = 200
 
     ## store all data in a list
+    """
     GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
     OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_mod.nc#mode=bytes"
     OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OI_NADIRSWOT_mod.nc#mode=bytes"
     sub_files = sub_domain['data']
-
+    """
+    GT_file               = "./data/NATL60_"+domain+"_XP1_GT.nc"
+    OBS_file              = "./data/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_mod.nc"
+    OI_file               = "./data/NATL60_"+domain+"_XP1_OI_NADIRSWOT_mod.nc"
+    sub_files = sub_domain['data']
     # Reload results
     lday    = xr.open_dataset(GT_file,decode_times=False).Time.values
     GT      = xr.open_dataset(GT_file,decode_times=False).ssh.values
     OBS     = xr.open_dataset(OBS_file,decode_times=False).ssh.values
     OI      = xr.open_dataset(OI_file,decode_times=False).ssh.values
-    sub_ds      = [xr.open_dataset(f"{sub_file}#mode=bytes",decode_times=False).ssh.values for sub_file in sub_files]
+    sub_ds      = [xr.open_dataset(f"{sub_file}",decode_times=False).ssh.values for sub_file in sub_files]
 
     # list_data (nadir+swot)
     list_data   = [GT, OBS, OI, *sub_ds]
