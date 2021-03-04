@@ -1,7 +1,7 @@
 from Metrics_NATL60 import *
 
 ## 1) Function for plotting nRMSE
-def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=False):
+def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=False,XP=1):
 
     N   = len(lday)
     GT  = list_data[0]
@@ -42,16 +42,15 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resf
             plt.plot(range(N),nRMSE[i],linestyle=lstyle[id_plot[i]],color=colors[id_plot[i]],linewidth=lwidth[id_plot[i]],label=r"$\nabla_{"+str.split(labels_data[id_plot[i]])[0]+"}$ "+str.split(labels_data[id_plot[i]])[1])
 
     # add vertical bar to divide the 4 periods
-    plt.axvline(x=19)
-    plt.axvline(x=39)
-    plt.axvline(x=59)
-    # graphical options
-    plt.ylim(0,ymax)
-    plt.ylabel('nRMSE')
-    plt.xlabel('Time (days)')
-    plt.xticks([0,20,40,60],\
-           [lday[0],lday[20],lday[40],lday[60]],\
-           rotation=45, ha='right')
+    if XP==1:
+    	plt.axvline(x=19)
+    	plt.axvline(x=39)
+    	plt.axvline(x=59)
+    	# graphical options
+    	plt.ylim(0,ymax)
+    	plt.ylabel('nRMSE')
+    	plt.xlabel('Time (days)')
+    	plt.xticks([0,20,40,60],[lday[0],lday[20],lday[40],lday[60]],rotation=45, ha='right')
     plt.margins(x=0)
     plt.grid(True,alpha=.3)
     plt.legend(loc='upper left',prop=dict(size='small'),frameon=False,bbox_to_anchor=(0,1.02,1,0.2),ncol=2,mode="expand")
