@@ -1,0 +1,6 @@
+data: ./data/experience2.nc
+code: https://github.com/maxbeauchamp/4DVARNN-DinAE
+domain: GULFSTREAM
+submitter: Ronan
+experiment_label: Grad genn nadir+swot XP2(Ronan)
+experiment_slug: Grad_genn-Ronan

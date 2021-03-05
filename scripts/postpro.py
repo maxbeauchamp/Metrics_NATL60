@@ -17,7 +17,7 @@ from ruamel import yaml
 # NN_lag     = sys.argv[2]
 # type_obs   = sys.argv[3]
 # domain     = sys.argv[4]
-XP=1 # XP = 1....5
+XP=2 # XP = 1....5
 workpath = Path("work")
 workpath.mkdir(exist_ok=True, parents=True)
 subm = 'submissions_XP'+str(XP)
@@ -34,8 +34,8 @@ if XP==1:
 	indx1= np.arange(80)
 	indx2= np.arange(80)
 if XP==2:
-	indx1= np.arange(20)
-	indx2= np.arange(20)
+	indx1= np.arange(19)
+	indx2= np.arange(19)
 if XP==3:
 	indx1= np.arange(20,40)
 	indx2= np.arange(20)
