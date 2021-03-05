@@ -17,7 +17,7 @@ from ruamel import yaml
 # NN_lag     = sys.argv[2]
 # type_obs   = sys.argv[3]
 # domain     = sys.argv[4]
-XP=2 # XP = 1....5
+XP=1 # XP = 1....5
 workpath = Path("work")
 workpath.mkdir(exist_ok=True, parents=True)
 subm = 'submissions_XP'+str(XP)

@@ -1,0 +1,6 @@
+data: ./data/inpainting_result.nc
+code: https://github.com/maxbeauchamp/4DVARNN-DinAE
+domain: GULFSTREAM
+submitter: Mohamed
+experiment_label: inpainting nadir+swot lag 5 XP1
+experiment_slug: inpainting-lag-5 
