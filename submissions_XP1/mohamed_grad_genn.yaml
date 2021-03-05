@@ -1,6 +1,0 @@
-data: ./data/NATL60_GULFSTREAM_XP1_GENN002.nc
-code: https://github.com/maxbeauchamp/4DVARNN-DinAE
-domain: GULFSTREAM
-submitter: Mohamed
-experiment_label: Grad genn nadir+swot lag 0 XP1
-experiment_slug: Grad_genn-lag-0 
