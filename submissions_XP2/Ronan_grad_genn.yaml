@@ -1,4 +1,4 @@
-data: ./data/experience2.nc
+data: ./data/res4Mohamed.nc
 code: https://github.com/maxbeauchamp/4DVARNN-DinAE
 domain: GULFSTREAM
 submitter: Ronan

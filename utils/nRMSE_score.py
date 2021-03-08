@@ -25,14 +25,18 @@ def nRMSE_scores(list_data,labels_data,resfile,gradient=False,XP=1):
         meth_i=list_data[id_plot[i]][index]
         print(labels_data[id_plot[i]])
         nRMSE=[]
+        MSE = []
         for j in range(len(meth_i)):
             if gradient==False:
                 nRMSE.append((np.sqrt(np.nanmean(((GT[j]-np.nanmean(GT[j]))-(meth_i[j]-np.nanmean(meth_i[j])))**2)))/np.nanstd(GT[j]))
+                MSE.append(np.nanmean(((GT[j]-np.nanmean(GT[j]))-(meth_i[j]-np.nanmean(meth_i[j])))**2))
             else:
                 nRMSE.append((np.sqrt(np.nanmean(((Gradient(GT[j],2)-np.nanmean(Gradient(GT[j],2)))-(Gradient(meth_i[j],2)-np.nanmean(Gradient(meth_i[j],2))))**2)))/np.nanstd(Gradient(GT[j],2)))
+                MSE.append(np.nanmean(((Gradient(GT[j],2)-np.nanmean(Gradient(GT[j],2)))-(Gradient(meth_i[j],2)-np.nanmean(Gradient(meth_i[j],2))))**2))
         scores.append(
             {
                 'label': label,
+                'mean_mse': np.nanmean(MSE),
                 'mean_rmse': np.nanmean(nRMSE),
                 '5_perc_rmse': np.percentile(nRMSE,5),
                 '95_perc_rmse': np.percentile(nRMSE,95),
