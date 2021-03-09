@@ -88,7 +88,7 @@ for domain in sub_df.domain.drop_duplicates():
     labels_data = np.array(['GT','Obs (nadir+swot)','OI (nadir+swot)', *sub_domain['experiment_label']])
     list_suffix = np.array(['GT','Obs_nadirswot','OI_nadirswot',*sub_domain['experiment_slug']])
     colors = np.array(
-        ['k', '', 'red', 'seagreen', 'steelblue', 'darkorange', '', 'red', 'seagreen', 'steelblue', 'darkorange'])[:len(list_data)]
+        ['k', '', 'red', 'seagreen', 'steelblue', 'darkorange', 'blue', 'red', 'seagreen', 'steelblue', 'darkorange'])[:len(list_data)]
     symbols = np.array(['k', '', 'p', 'p', 'p', 'p', 'p', '', 'o', 'o', 'o', 'o', 'o'])[:len(list_data)]
     lstyle = np.array(
         ['solid', '', 'dashed', 'dashed', 'dashed', 'dashed', 'dashed', '', 'solid', 'solid', 'solid', 'solid',

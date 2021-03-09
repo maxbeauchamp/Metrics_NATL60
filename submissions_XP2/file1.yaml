@@ -1,0 +1,6 @@
+data: ./data/Ronan_data/res4Mohamed.nc
+code: https://github.com/maxbeauchamp/4DVARNN-DinAE
+domain: GULFSTREAM
+submitter: Ronan
+experiment_label: Grad GENN XP2(Ronan)-1
+experiment_slug: Grad_genn-Ronan-1

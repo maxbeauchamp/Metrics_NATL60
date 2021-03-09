@@ -1,0 +1,6 @@
+data: ./data/Ronan_data/resInterpSWOTSLAwOInoSST_128x128x05_GENN_1_10_05_SZeros_HRObs_OIObs_MS_Grad_02_02_05_50_modelAE_iter040_ResTestData.nc
+code: https://github.com/maxbeauchamp/4DVARNN-DinAE
+domain: GULFSTREAM
+submitter: Ronan
+experiment_label: Grad GENN XP2(Ronan)-6
+experiment_slug: Grad_genn-Ronan-6
