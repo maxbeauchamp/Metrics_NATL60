@@ -35,6 +35,7 @@ sub_df = pd.DataFrame(submission_data)
 (workpath / "submission.md").write_text(sub_df.to_markdown())
 for domain in sub_df.domain.drop_duplicates():
     sub_domain = sub_df.loc[lambda df: df.domain == domain]
+
     ## parameters
     if domain=="OSMOSIS":
         extent     = [-19.5,-11.5,45.,55.]
@@ -50,9 +51,9 @@ for domain in sub_df.domain.drop_duplicates():
         indLon     = 200
 
     ## store all data in a list
-    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
-    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_mod.nc#mode=bytes"
-    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/data/NATL60_"+domain+"_XP1_OI_NADIRSWOT_mod.nc#mode=bytes"
+    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
+    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_obs.nc#mode=bytes"
+    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_OI_NADIRSWOT_obs.nc#mode=bytes"
     sub_files = sub_domain['data']
 
     # Reload results
