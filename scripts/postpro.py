@@ -88,7 +88,7 @@ for domain in sub_df.domain.drop_duplicates():
     indLon  = int(indLon/dwscale)
     indLat  = int(indLat/dwscale)
     lon = np.arange(extent[0],extent[1],1/(20/dwscale))
-    lat = np.arange(extent[2],extent[3],1/(20/dwscale))New XP Grad-GENN by Maxime
+    lat = np.arange(extent[2],extent[3],1/(20/dwscale))
 
 
     if domain=="OSMOSIS":
