@@ -1,4 +1,4 @@
-data: https://s3.eu-central-1.wasabisys.com/melody/metrics_data/NATL60_GULFSTREAM_XP2_Maxime_GB1_GENN.nc # url of your test data
+data: https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/XP_Maxime/XP2/NATL60_GULFSTREAM_XP2_Maxime_GB1_GENN.nc # url of your test data
 code: https://github.com/maxbeauchamp/4DVARNN-DinAE # link to the code used to generate the data (can be a notebook)
 domain: GULFSTREAM # domain
 submitter: Maxime # Name of the submitter
