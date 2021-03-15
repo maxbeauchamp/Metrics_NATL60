@@ -88,7 +88,7 @@ for domain in sub_df.domain.drop_duplicates():
     indLon  = int(indLon/dwscale)
     indLat  = int(indLat/dwscale)
     lon = np.arange(extent[0],extent[1],1/(20/dwscale))
-    lat = np.arange(extent[2],extent[3],1/(20/dwscale))
+    lat = np.arange(extent[2],extent[3],1/(20/dwscale))New XP Grad-GENN by Maxime
 
 
     if domain=="OSMOSIS":
@@ -101,5 +101,5 @@ for domain in sub_df.domain.drop_duplicates():
     plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=True)
 
     resfile=workpath / f"{domain}_nrmse_score.txt"
-    nRMSE_scores(list_data,labels_data,resfile,gradient=False)
+    nRMSE_scores(list_data,labels_data,resfile,id_xp=XP,gradient=False)
 

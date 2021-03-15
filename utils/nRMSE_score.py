@@ -2,13 +2,16 @@ from pathlib import Path
 
 from Metrics_NATL60 import *
 import pandas as pd
-def nRMSE_scores(list_data,labels_data,resfile,gradient=False):
+def nRMSE_scores(list_data,labels_data,resfile,id_xp,gradient=False):
 
     # select only 10-day windows
-    index=list(range(5,16))
-    index.extend(range(25,36))
-    index.extend(range(45,56))
-    index.extend(range(65,76))
+    if id_xp==1:
+        index=list(range(5,16))
+        index.extend(range(25,36))
+        index.extend(range(45,56))
+        index.extend(range(65,76))
+    if id_xp==2:
+        index = list(range(0,20))
 
     GT  = list_data[0][index]
 
