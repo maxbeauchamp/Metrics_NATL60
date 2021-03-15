@@ -51,9 +51,9 @@ for domain in sub_df.domain.drop_duplicates():
         indLon     = 200
 
     ## store all data in a list
-    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_GT.nc#mode=bytes"
-    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_OBS_NADIRSWOT_obs.nc#mode=bytes"
-    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP1_OI_NADIRSWOT_obs.nc#mode=bytes"
+    GT_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP"+str(XP)+"_GT.nc#mode=bytes"
+    OBS_file              = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP"+str(XP)+"_OBS_NADIRSWOT_obs.nc#mode=bytes"
+    OI_file               = "https://s3.eu-central-1.wasabisys.com/melody/Metrics_NATL60/Datasets/XP"+str(XP)+"/NATL60_"+domain+"_XP"+str(XP)+"_OI_NADIRSWOT_obs.nc#mode=bytes"
     sub_files = sub_domain['data']
 
     # Reload results
