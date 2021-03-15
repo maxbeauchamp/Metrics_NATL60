@@ -49,9 +49,9 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resf
     plt.ylim(0,ymax)
     plt.ylabel('nRMSE')
     plt.xlabel('Time (days)')
-    plt.xticks([0,20,40,60],\
-           [lday[0],lday[20],lday[40],lday[60]],\
-           rotation=45, ha='right')
+    idx = np.arange(0,len(lday),5,dtype=int)
+    plt.set_xticks(idx)
+    plt.set_xticklabels([ lday[i] for i in idx ],rotation=45, ha='right')
     plt.margins(x=0)
     plt.grid(True,alpha=.3)
     plt.legend(loc='upper left',prop=dict(size='small'),frameon=False,bbox_to_anchor=(0,1.02,1,0.2),ncol=2,mode="expand")
