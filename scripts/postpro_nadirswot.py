@@ -92,7 +92,7 @@ lat = np.arange(extent[2],extent[3],1/(20/dwscale))
 #animate_plots(list_data,labels_data,lday,extent,lon,lat,resfile,gradient=True)
 ## plot individual maps (SSH & Gradients)
 plot_maps(list_data,list_suffix,labels_data,lday,"2013-08-04",extent,lon,lat,workpath)
-## Export methods to NetCDF
+'''## Export methods to NetCDF
 ncdf_file=workpath+"/NetCDF_nadirswot.nc"
 export_NetCDF(list_data,labels_data,lday,lon,lat,ncdf_file)
 ## test PSD
@@ -117,4 +117,4 @@ plot_SNR(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resssh,resfile)
 ## average Taylor diagrams
 resfile=workpath+"/Taylor_diagram_nadirswot.png"
 Taylor_diagram(list_data,labels_data,colors,symbols,resfile)
-
+'''

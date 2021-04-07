@@ -3,12 +3,9 @@ from Metrics_NATL60 import *
 def RIAE_scores(list_data,labels_data,resfile,pct_var,gradient=False):
 
     # select only 10-day windows
-    index=list(range(5,16))
-    index.extend(range(25,36))
-    index.extend(range(45,56))
-    index.extend(range(65,76))
-
-    # apply High-Pass Filter to visualize Taylor diagrams only for small scales
+    index = list(range(0,20))
+ 
+    #apply High-Pass Filter to visualize Taylor diagrams only for small scales
     HR = list_data[2][index]
     lr = np.copy(HR).reshape(HR.shape[0],-1)
     tmp = lr[0,:]
@@ -22,12 +19,16 @@ def RIAE_scores(list_data,labels_data,resfile,pct_var,gradient=False):
     lr[:,sea_v2] = DataReconstructed_global
     lr = lr.reshape(HR.shape)
 
+    # use OI as lr
+    #id_OI=np.where(["OI" in l for l in labels_data ])[0][0]
+    #lr = list_data[id_OI][index]
+
     def Iscore(mask1,gt,itrp):
-        return 100*(1-np.nanmean(((mask1*gt-np.nanmean(mask1*gt))-(mask1*itrp-np.nanmean(mask1*itrp)))**2)/np.nanvar(mask1*gt))
+        return 100*(1-np.nanmean(((mask1*gt)-(mask1*itrp))**2)/np.nanvar((mask1*gt)))
     def Rscore(mask1,gt,itrp):
-        return 100*(1-np.nanmean(((mask1*gt-np.nanmean(mask1*gt))-(mask1*itrp-np.nanmean(mask1*itrp)))**2)/np.nanvar(mask1*gt))
+        return 100*(1-np.nanmean(((mask1*gt)-(mask1*itrp))**2)/np.nanvar((mask1*gt)))
     def AEscore(gt,itrp):
-        return 100*(1-np.nanmean(((gt-np.nanmean(gt))-(itrp-np.nanmean(itrp)))**2)/np.nanvar(gt))
+        return 100*(1-np.nanmean((gt-itrp)**2)/np.nanvar((gt)))
 
     ## Compute mask nadir / swot  
     if any("Obs (nadir+swot)"==s for s in labels_data):
@@ -56,17 +57,20 @@ def RIAE_scores(list_data,labels_data,resfile,pct_var,gradient=False):
 
     # flatten lr
     lr = lr.flatten()
+    lf = lr.fill(0)
 
     # Compute R/I/AE scores
     id1=np.where(["GT" not in l for l in labels_data ])[0]
     id2=np.where(["Obs" not in l for l in labels_data ])[0]
     id_plot=np.intersect1d(id1,id2)
-    tab_scores = np.zeros((len(labels_data[id_plot])-1,3))
+    print(labels_data)
+    print(id_plot)
+    tab_scores = np.zeros((len(labels_data[id_plot]),3))
     for i in range(len(labels_data[id_plot])):
         meth_i=list_data[id_plot[i]][index]
         print(labels_data[id_plot[i]])
         if ("rec" in labels_data[id_plot[i]]):
-            tab_scores[i-1,2] = AEscore(GT.flatten()-lr,meth_i.flatten()-lr)
+            tab_scores[i,2] = AEscore(GT.flatten()-lr,meth_i.flatten()-lr)
         else:
             if ("nadir+swot" in labels_data[id_plot[i]]):
                 tab_scores[i,0] = Rscore(mask1_nadirswot,GT.flatten()-lr,meth_i.flatten()-lr)
