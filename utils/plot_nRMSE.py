@@ -42,15 +42,18 @@ def plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resf
             plt.plot(range(N),nRMSE[i],linestyle=lstyle[id_plot[i]],color=colors[id_plot[i]],linewidth=lwidth[id_plot[i]],label=r"$\nabla_{"+str.split(labels_data[id_plot[i]])[0]+"}$ "+str.split(labels_data[id_plot[i]])[1])
 
     # add vertical bar to divide the 4 periods
-    plt.axvline(x=19)
+    '''plt.axvline(x=19)
     plt.axvline(x=39)
-    plt.axvline(x=59)
+    plt.axvline(x=59)'''
     # graphical options
     plt.ylim(0,ymax)
     plt.ylabel('nRMSE')
     plt.xlabel('Time (days)')
-    plt.xticks([0,20,40,60],\
+    '''plt.xticks([0,20,40,60],\
            [lday[0],lday[20],lday[40],lday[60]],\
+           rotation=45, ha='right')'''
+    plt.xticks([0,10,19],\
+           [lday[0],lday[10],lday[19]],\
            rotation=45, ha='right')
     plt.margins(x=0)
     plt.grid(True,alpha=.3)

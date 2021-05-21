@@ -142,10 +142,12 @@ resfile=workpath+"/TS_nRMSE_nadirswot.png"
 plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=False)
 resfile=workpath+"/TS_nRMSE_Grad_nadirswot.png"
 plot_nRMSE(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,ymax,resfile,gradient=True)
+'''
 ## average SNR
 resfile=workpath+"/SNR_nadirswot.png"
 resssh=4*dwscale
 plot_SNR(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resssh,resfile)
+'''
 ## average Taylor diagrams
 resfile=workpath+"/Taylor_diagram_nadirswot.png"
 Taylor_diagram(list_data,labels_data,colors,symbols,resfile)

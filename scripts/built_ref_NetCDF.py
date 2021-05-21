@@ -12,7 +12,7 @@ def mk_dir_recursive(dir_path):
     if not os.path.isdir(new_path):
         os.mkdir(new_path)
 
-id_xp=2
+id_xp=3
 workpath = "/gpfswork/rech/yrf/uba22to"
 
 lon = xr.open_dataset(
@@ -26,6 +26,10 @@ if id_xp==1:
 if id_xp==2:
     indN_Tt = np.arange(60,80)
     indN_Tr = np.concatenate([np.arange(0,45),np.arange(95,365)])
+if id_xp==3:
+    indN_Tt = np.arange(90,110)
+    indN_Tr = np.concatenate([np.arange(0,80),np.arange(120,365)])
+
 
 if not os.path.exists(workpath+"/Metrics_NATL60/data/XP"+str(id_xp)):
     mk_dir_recursive(workpath+"/Metrics_NATL60/data/XP"+str(id_xp))
@@ -72,7 +76,7 @@ time = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_swot_4nadir.nc",decod
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_swot_4nadir.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:200]
+ssh = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_swot_4nadir.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:200]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -80,7 +84,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OI_NADIRSWOT_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OI_NADIRSWOT_obs.nc", mode='w')
 
 lon = xr.open_dataset(
 datapath+"/OSMOSIS/oi/ssh_NATL60_swot_4nadir.nc",decode_times=False).lon.values[:160]
@@ -90,7 +94,7 @@ time = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_swot_4nadir.nc",decode_t
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_swot_4nadir.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:160]
+ssh = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_swot_4nadir.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:160]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -98,7 +102,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OI_NADIRSWOT_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OI_NADIRSWOT_obs.nc", mode='w')
 
 lon = xr.open_dataset(
 datapath+"/GULFSTREAM/oi/ssh_NATL60_4nadir.nc",decode_times=False).lon.values[:200]
@@ -108,7 +112,7 @@ time = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_4nadir.nc",decode_tim
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_4nadir.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:200]
+ssh = xr.open_dataset(datapath+"/GULFSTREAM/oi/ssh_NATL60_4nadir.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:200]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -116,7 +120,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OI_NADIR_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OI_NADIR_obs.nc", mode='w')
 
 lon = xr.open_dataset(
 datapath+"/OSMOSIS/oi/ssh_NATL60_4nadir.nc",decode_times=False).lon.values[:160]
@@ -126,7 +130,7 @@ time = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_4nadir.nc",decode_times=
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_4nadir.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:160]
+ssh = xr.open_dataset(datapath+"/OSMOSIS/oi/ssh_NATL60_4nadir.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:160]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -134,7 +138,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OI_NADIR_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OI_NADIR_obs.nc", mode='w')
 
 
 # % DATA
@@ -145,7 +149,7 @@ time = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:160]
+ssh = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:160]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -153,7 +157,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OBS_NADIR_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OBS_NADIR_obs.nc", mode='w')
 
 lon = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).lon.values[:160]
 lat = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).lat.values[:200]
@@ -161,7 +165,7 @@ time = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:160]
+ssh = xr.open_dataset(datapath+"/OSMOSIS/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:160]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -169,7 +173,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OBS_NADIRSWOT_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_OSMOSIS_XP"+str(id_xp)+"_OBS_NADIRSWOT_obs.nc", mode='w')
 
 
 lon = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d.nc",decode_times=False).lon.values[:200]
@@ -178,7 +182,7 @@ time = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/datas
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:200]
+ssh = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:200]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -186,7 +190,7 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OBS_NADIR_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OBS_NADIR_obs.nc", mode='w')
 
 lon = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).lon.values[:200]
 lat = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).lat.values[:200]
@@ -194,7 +198,7 @@ time = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/datas
 mesh_lat, mesh_lon = np.meshgrid(lat, lon)
 mesh_lat = mesh_lat.T
 mesh_lon = mesh_lon.T
-ssh = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).ssh_mod.values[indN_Tt,:200,:200]
+ssh = xr.open_dataset(datapath+"/GULFSTREAM/data/gridded_data_swot_wocorr/dataset_nadir_0d_swot.nc",decode_times=False).ssh_obs.values[indN_Tt,:200,:200]
 xrdata = xr.Dataset(\
                 data_vars={'longitude': (('lat','lon'),mesh_lon),\
                            'latitude' : (('lat','lon'),mesh_lat),\
@@ -202,5 +206,5 @@ xrdata = xr.Dataset(\
                            'ssh'  : (('time','lat','lon'),ssh)},\
                 coords={'lon': lon,'lat': lat,'time': indN_Tt})
 xrdata.time.attrs['units']='days since 2012-10-01 00:00:00'
-xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OBS_NADIRSWOT_mod.nc", mode='w')
+xrdata.to_netcdf(path=workpath+"/Metrics_NATL60/data/XP"+str(id_xp)+"/NATL60_GULFSTREAM_XP"+str(id_xp)+"_OBS_NADIRSWOT_obs.nc", mode='w')
 

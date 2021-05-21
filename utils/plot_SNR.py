@@ -8,6 +8,9 @@ def plot_SNR(list_data,labels_data,colors,symbols,lstyle,lwidth,lday,resssh,resf
     index.extend(range(45,56))
     index.extend(range(65,76))
 
+    # select only 10-day windows
+    index = list(range(0,20))
+
     GT  = list_data[0][index]
 
     # Compute Signal-to-Noise ratio
